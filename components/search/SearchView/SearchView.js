@@ -82,7 +82,8 @@ const SearchPage = ({ setSelected, setOptions, options, query, data }) => {
         </div>
       </Container>
 
-      <FilterSearch show={toggleFilter} onToggleFilter={setToggleFilter} onHide={() =>  setToggleFilter(!toggleFilter)} />
+//       <FilterSearch show={toggleFilter} onToggleFilter={setToggleFilter} onHide={() =>  setToggleFilter(!toggleFilter)} />
+      <FilterSearch show={toggleFilter} onToggleFilter={setToggleFilter} onHide={() => setToggleFilter(false)} />
     </>
   );
 };

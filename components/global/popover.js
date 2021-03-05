@@ -22,10 +22,32 @@ const SearchHistories = styled.ul`
   gap: 16px;
   max-height: 220px;
   overflow-y: scroll;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  & {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  @media ${(props) => props.theme.mediaQueries.laptop} {
+    display: block;
+  }
 `;
 
 const SearchHistoriesItem = styled(Body)`
   color: ${(props) => props.theme.colors.subtleText};
+
+  &:first-child {
+    margin-top: 7px;
+  }
+  &:not(:last-child) {
+    margin-bottom: 4px;
+  }
 `;
 
 const popover = ({ title, list, onSetPopup }) => {
@@ -35,7 +57,7 @@ const popover = ({ title, list, onSetPopup }) => {
   const router = useRouter();
 
   const handleClick = (selected) => {
-    onSetPopup(false);
+    onSetPopup();
     router.push(`/search/${selected}`);
   };
 
@@ -45,7 +67,7 @@ const popover = ({ title, list, onSetPopup }) => {
 
       {list.map((name, i) => (
         <SearchHistoriesItem
-          key={`name-${i}`}
+          key={`${name} ${i}`}
           onClick={() => handleClick(name)}
         >
           {name}

@@ -5,10 +5,18 @@ const withAuthComponent = (Component) => {
   return (props) => {
     useEffect(() => {
       if (props.isLogin) {
-        console.log('YOURE LOG IN');
-        // typeof window !== 'undefined' && Router.push('/dashboard');
-      } else {
-        console.log('YOURE NOT LOG IN');
+        typeof window !== 'undefined' && Router.push('/dashboard');
+      }
+    }, [props.isLogin]);
+
+    return <Component {...props} />;
+  };
+};
+
+const ProtectedComponent = (Component) => {
+  return (props) => {
+    useEffect(() => {
+      if (!props.isLogin) {
         typeof window !== 'undefined' && Router.push('/');
       }
     }, [props.isLogin]);
@@ -17,4 +25,4 @@ const withAuthComponent = (Component) => {
   };
 };
 
-export default withAuthComponent;
+export { withAuthComponent, ProtectedComponent };

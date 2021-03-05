@@ -23,8 +23,8 @@ const Star = (star) => {
     wStars.push(index)
   }
 
-  const yRes = yStars.map((key) => (<div style={{ paddingRight: 8 }}><Image key={key} src="/icons/yellow-star.svg" width="42px" height="42px" /></div>))
-  const wRes = wStars.map((key) => (<div style={{ paddingRight: 8 }}><Image key={key} src="/icons/white-star.svg" width="42px" height="42px" /></div>))
+  const yRes = yStars.map((e, index) => (<div style={{ paddingRight: 8 }}><Image key={index} src="/icons/yellow-star.svg" width="42px" height="42px" /></div>))
+  const wRes = wStars.map((e, index) => (<div style={{ paddingRight: 8 }}><Image key={index} src="/icons/white-star.svg" width="42px" height="42px" /></div>))
 
   return (<>{yRes}{wRes}</>)
 }
@@ -46,7 +46,7 @@ const ProfileCard = ({ img, fullname, title, username, star, rating, joined, onC
   }
 
   return (
-    <CardContainer>
+    <CardContainer key={new Date()}>
       <FlexContainer>
         <CardImage
           style={{ display: 'none' }}

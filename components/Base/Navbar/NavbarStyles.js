@@ -31,8 +31,6 @@ export const HamburgerMenu = styled.button`
 
 
 
-
-
 export const NavbarLeft = styled.div`
 ${mixins.flex}
 gap:20px;
@@ -40,7 +38,6 @@ gap:20px;
 @media ${(props) => props.theme.mediaQueries.tablet}{
   gap:40px;
 }
-
 
 
 `
@@ -60,24 +57,6 @@ export const NavbarInput = styled(Input)`
   }
 `;
 
-export const NotificationContainer = styled.div`
-  position: relative;
-`;
-
-export const Badge = styled.span`
-  position: absolute;
-  top: -12px;
-  right: -10px;
-  border-radius: 50%;
-  background: ${(props) => props.theme.colors.error};
-  color: white;
-  padding: 1px 2px;
-  width: 19px;
-  height: 19px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-`;
 
 export const SearchContent = styled.div`
   position: relative;

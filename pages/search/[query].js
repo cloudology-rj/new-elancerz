@@ -33,28 +33,36 @@ const SearchPage = (props) => {
     { enabled: queryIsAvailable }
   );
 
-  return (
-    <CategoryContainer>
-      <Layout>
-        <SearchViewWithHOC
-          error={error}
-          errorComponent={
-            <NotFound>
-              <HeaderTwo>
-                Sorry, something went wrong with your requess
-              </HeaderTwo>
-            </NotFound>
-          }
-          isLoading={isLoading}
-          setSelected={setSelected}
-          setOptions={setOptions}
-          options={options}
-          data={data}
-          query={query}
-        />
-      </Layout>
-    </CategoryContainer>
-  );
+  
+
+
+  if(router.isReady){
+    return (
+      <CategoryContainer>
+        <Layout>
+          <SearchViewWithHOC
+            error={error}
+            errorComponent={
+              <NotFound>
+                <HeaderTwo>
+                  Sorry, something went wrong with your requess
+                </HeaderTwo>
+              </NotFound>
+            }
+            isLoading={isLoading}
+            setSelected={setSelected}
+            setOptions={setOptions}
+            options={options}
+            data={data}
+            query={query}
+          />
+        </Layout>
+      </CategoryContainer>
+    );
+  } else{
+    return null
+  }
+  
 };
 
 export default SearchPage;

@@ -20,7 +20,7 @@ const About = (props) => {
         <AboutContent>
           <VideoSample></VideoSample>
 
-          <div>
+          <div >
             <Lead>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Lead>

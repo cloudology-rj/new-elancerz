@@ -31,7 +31,7 @@ const DropdownHeader = styled.div`
 
 const DropdownList = styled.ul`
 
-
+z-index:200;
   background: ${(props) => props.theme.colors.primaryBrand};
   position: absolute;
   // bottom: -170px;
@@ -56,6 +56,7 @@ const DropdownListItem = styled.button`
   text-align: left;
   font-family: 'Open sans';
   font-weight: 600;
+
 
   padding: 10px 0;
 

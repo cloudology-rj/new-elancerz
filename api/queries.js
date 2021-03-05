@@ -159,14 +159,21 @@ export const createRoomOrChat = async ({ ...quote }) => {
   const allmsg = await getMessages(quote.token)
   const checkifExistedRoom = await allmsg.data.filter(x => x.received_by_user.id == quote.selectedProfile)
 
+  let idReturn
 
   if (checkifExistedRoom?.length > 0) {
-    return true
+    // return id
+    console.log(true)
+    idReturn = checkifExistedRoom[0]
   } else {
     // create a room and msg
-    await createMessage({ token, data })
-    return false
+    const newroom = await createMessage({ token, data })
+    // return id
+    console.log(false)
+    idReturn = newroom
   }
+
+  return idReturn
 
 };
 

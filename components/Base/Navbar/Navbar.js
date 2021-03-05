@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -7,32 +6,26 @@ import { useAuth } from '../../../context/AuthProvider';
 
 import { LogoSmall } from '@/components/global/Logo';
 import Popover from '@/components/global/popover';
-import { ButtonPrimary, ButtonTertiary } from '@/components/global/Button';
 import Container from '@/components/global/Container';
 import SidebarNav from '../SidebarNav/SidebarNav';
+import NavbarRight from '../NavbarRight/NavbarRight';
 
 
-import { IsMobileContext } from '../../../context/IsMobile';
-import AuthModal from '../../../HOC/AuthModal';
 
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 
 import Hamburger from '../../../public/icons/menu.svg';
-import Chat from '../../../public/icons/chat.svg';
-import Notification from '../../../public/icons/Bell.svg';
 
 import {
   HeaderContainer,
   NavbarInput,
-  Badge,
   SearchContent,
-  NotificationContainer,
   NavbarLeft,
 } from './NavbarStyles';
 
 import { Flex } from '../../../styles/reusableStyles';
 
-const Navbar = ({ fixed, signin, signup }) => {
+const Navbar = ({ fixed }) => {
   const [toggle, setToggle] = useState(false);
   const [keyword, setKeyword] = useState(null);
   const [popup, setPopup] = useState(false);
@@ -43,30 +36,31 @@ const Navbar = ({ fixed, signin, signup }) => {
   ]);
 
   const router = useRouter();
-  const { query } = router.query;
 
-  const [isMobile] = useContext(IsMobileContext);
   const { isLogin } = useAuth();
 
   useEffect(() => {
     window.localStorage.setItem('histories', JSON.stringify(searchQueries));
   }, [searchQueries]);
 
-  // useEffect(() => {
-  //   setKeyword(null);
-  // }, [query]);
-
   const handleEnter = (e) => {
     if (e.key === 'Enter') {
+
+      if(keyword === '' || keyword === null){
+        return
+      }
+
       const currKeyword = keyword;
 
-      const histories = JSON.parse(window.localStorage.getItem('histories')) || []; //the "|| []" replaces possible null from localStorage with empty array
+      const histories =
+        JSON.parse(window.localStorage.getItem('histories')) || []; //the "|| []" replaces possible null from localStorage with empty array
       const newKeyword = currKeyword.replace('/', ' ');
+
+      console.log(newKeyword);
 
       if (histories.indexOf(newKeyword) == -1) {
         histories.push(newKeyword);
         setSearchQueries([...searchQueries, newKeyword]);
-      
       }
       router.push(`/search/${newKeyword}`);
       setKeyword('');
@@ -96,42 +90,13 @@ const Navbar = ({ fixed, signin, signup }) => {
                 <Popover
                   title="Search History"
                   list={searchQueries}
-                  onSetPopup={setPopup}
+                  onSetPopup={() => setPopup(false)}
                   popup={popup}
                 />
               )}
             </SearchContent>
-            {isLogin ? (
-              <>
-                <NotificationContainer>
-                  <Notification />
-                  {/* <Badge></Badge> */}
-                </NotificationContainer>
 
-                <NotificationContainer>
-                  <Chat />
-                  {/* <Badge></Badge> */}
-                </NotificationContainer>
-              </>
-            ) : isMobile ? (
-              <>
-                <ButtonPrimary onClick={() => router.push('/account/sign-in')}>
-                  login
-                </ButtonPrimary>
-              </>
-            ) : (
-              <>
-                <ButtonPrimary onClick={() => signup(true)}>
-                  sign up
-                </ButtonPrimary>
-
-                <ButtonTertiary onClick={() => signin(true)}>
-                  login
-                </ButtonTertiary>
-              </>
-            )}
-
-            {/* if not logged in  */}
+            <NavbarRight isLogin={isLogin} />
           </Flex>
         </HeaderContainer>
       </Container>
@@ -140,4 +105,4 @@ const Navbar = ({ fixed, signin, signup }) => {
   );
 };
 
-export default AuthModal(Navbar);
+export default Navbar;

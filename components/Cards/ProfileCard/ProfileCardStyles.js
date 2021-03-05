@@ -69,6 +69,7 @@ export const EditCardImage = styled.div`
   background-size: cover;
   position: relative;
   background-image: url("${({ img }) => { return img }}");
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05)) , url("${({ img }) => { return img }}");
 
   ${({ state }) =>
     state &&

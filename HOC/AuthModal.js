@@ -10,6 +10,8 @@ const withAuthModal = (Component) => (props) => {
   const [showSignin, setShowSignin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [userId, setUserId] = useState(null);
+
 
  
 
@@ -34,9 +36,9 @@ const withAuthModal = (Component) => (props) => {
 
   const goToUser = () => {
     console.log('running');
-    const { id } = props;
+
     // if no id was found redirect to dashboard after signing in
-    id ? Router.push(`/profile/view/${props}`) : Router.push('/dashboard');
+    userId ? Router.push(`/profile/view/${userId}`) : Router.push('/dashboard');
   };
 
   return (
@@ -73,6 +75,7 @@ const withAuthModal = (Component) => (props) => {
         }
       />
       <Component
+      setUser={setUserId}
         openAuthModal={setShowSignin}
         signin={setShowSignin}
         signup={setShowSignup}

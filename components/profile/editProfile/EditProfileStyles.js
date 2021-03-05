@@ -65,10 +65,6 @@ export const HeroImage = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-<<<<<<< Updated upstream
-  padding:1.5em;argin: 0 1.5em 12em 1.5em;
-}
-=======
   // padding:1.5em;
   padding: 32px 12px;
   top:0;
@@ -78,7 +74,6 @@ export const HeroImage = styled.div`
     padding: 32px 64px;
     height: 480px;
   }
->>>>>>> Stashed changes
 `;
 
 

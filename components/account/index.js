@@ -7,7 +7,7 @@ import ForgotPassword from './ForgotPassword/ForgotPassword';
 
 import { useAuth } from '../../context/AuthProvider';
 
-import withAuthComponent from '../../HOC/withAuth';
+import {withAuthComponent} from '../../HOC/withAuth';
 
 const SigninWithAuth = withAuthComponent(Signin);
 const SignupWithAuth = withAuthComponent(Signup);

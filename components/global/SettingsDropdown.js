@@ -45,12 +45,13 @@ const DropdownList = styled.ul`
   flex-direction: column;
 
   padding: 17px;
-  right: 70px;
-  margin-top: 75px;
-  min-width: 100%;
+  right: 45px;
+  margin-top: 29px;
+  min-width: 75%;
 
   @media ${(props) => props.theme.mediaQueries.tablet} {
-    min-width: 320px;
+    min-width: 295px;
+    right: 70px;
   }
 
 `;
@@ -63,7 +64,7 @@ const DropdownListItem = styled.button`
   text-align: left;
   font-family: 'Open sans';
   font-weight: 600;
-
+  cursor: pointer;
   padding: 10px 0;
 
   &:hover {
@@ -74,7 +75,6 @@ const DropdownListItem = styled.button`
 
 
 const Arrow = styled.div`
-
 position: absolute;
 width: 20px;
 height: 8px;

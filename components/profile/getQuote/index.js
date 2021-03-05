@@ -21,11 +21,9 @@ const getQuote = ({ isPublic, status, id, login, token }) => {
       token: token,
       loginUser: login
     }
-    // console.warn(dataQuote)
     const res = await createRoomOrChat(dataQuote)
-    router.push(`/messages/${selectedProfile}`)
+    router.push(`/messages/${res?.id}`)
 
-    // router.push(`/messages/${selectedProfile}`)
   }
 
 
@@ -35,7 +33,7 @@ const getQuote = ({ isPublic, status, id, login, token }) => {
         <ButtonPrimary>
           <Flex gap="5px" align="center">
             <SendQuote white={true} />
-          SEND A MESSAGEs
+          SEND A MESSAGE
         </Flex>
         </ButtonPrimary>
       </div>

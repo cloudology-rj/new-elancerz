@@ -18,6 +18,7 @@ import {
   MessageLeft,
   MessageLeftWrapper,
   MessageRight,
+  MessageRightSrv,
   MessageRightWrapper,
   Messages,
 } from './ConversationMainStyles';
@@ -114,29 +115,15 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
     const [SelectedProj, setSelectedProj] = useState();
     const [milestoneTotal, setmilestoneTotal] = useState(0)
     const [Total, setTotal] = useState()
+
+    const [firstMTotal, setfirstMTotal] = useState()
+
     const [isLessThan, setisLessThan] = useState(false)
     const [isCounter, setisCounter] = useState(false)
 
 
-
-
-    let firstMsg
-    let currentServiceID
-
-    let firstMsgProj
-    let currentProjID
-
-    let firstMsgStart
-
     let counterBy = []
-
-
     const [canStart, setcanStart] = useState(true)
-
-
-
-
-
 
     // modal
     const ModalContent = () => {
@@ -181,7 +168,9 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
 
           if (res) {
             console.info('start project')
+            document.getElementById('msgRed').innerHTML = ''
             document.getElementById('customBtn').innerHTML = 'START PROJECT'
+            document.getElementById('customBtn').style.background = '#4CD7D0'
             // setisLessThan(false)
             // setisCounter(false)
           } else {
@@ -196,11 +185,21 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
               document.getElementById('customBtn').innerHTML = 'SUBMIT PROPOSAL'
               document.getElementById('customBtn').style.background = '#D03131'
 
+            }
+            else if (totalorig < totalx) {
+              // setisLessThan(true)
+              // setisCounter(false)              
+              // show your danger submit proposal btn with message that it is less than the orig proposal
+              document.getElementById('msgRed').innerHTML = `Total amount to be paid ($${totalx}) will be more than the initial proposal ($${totalorig})`
+              document.getElementById('customBtn').innerHTML = 'SUBMIT PROPOSAL'
+              document.getElementById('customBtn').style.background = '#D03131'
+
             } else {
               // counter offer
               // setisLessThan(false)
               // setisCounter(true)
               // console.info('submit proposal')
+              document.getElementById('msgRed').innerHTML = ''
               document.getElementById('customBtn').innerHTML = 'SUBMIT PROPOSAL'
               document.getElementById('customBtn').style.background = '#4CD7D0'
             }
@@ -234,7 +233,8 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
 
             // check if who where to send
             const toChat = roomCreator == user?.id ? getconvo?.received_by_user?.first_name : getconvo?.created_by_user?.first_name
-            const defaultMessage = `Hi ${toChat && !null}! I changed some details on the proposal. Let me know what you think.
+
+            const defaultMessage = `Hi ${toChat == null ? '' : toChat}! I changed some details on the proposal. Let me know what you think.
                 [elance-project]${prj?.id}[/elance-project] [elance-counterBy]${user?.id}[/elance-counterBy]`
 
             var newPrices = await
@@ -272,7 +272,7 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
             <br></br>
             <HeaderThree>{prj.name} (${parseFloat(Total)})</HeaderThree>
             <br />
-            <div style={{ overflowY: ThisMilestones.length > 2 ? 'scroll' : 'none', padding: 12, height: 470 }}>
+            <div style={{ overflowY: 'auto', padding: 12, height: 470 }}>
               {
 
 
@@ -297,22 +297,22 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
                           </ButtonIcon>
                         </Flex50L>
                         {
-                          !isStarted ?
+                          canStart ?
                             <Flex50R>
                               <Image src={'/icons/dollar-gray.svg'} width={16} height={30} />
                               &emsp;
-                              <Input className="FeeMilestone" type="number" name={`fee-${e.id}`} id={`fee-${e.id}`} defaultValue={e.price} onChange={e => countTotal(e.target.value)} />
+                              <Input min={1} className="FeeMilestone" type="number" name={`fee-${e.id}`} id={`fee-${e.id}`} defaultValue={e.price} onChange={e => countTotal(e.target.value)} />
                             </Flex50R>
                             :
                             <Flex50R>
                               <Image src={'/icons/dollar-gray.svg'} width={16} height={30} />
                               &emsp;
-                              <Input disabled={true} type="number" name={`Rfee-${e.id}`} id={`Rfee-${e.id}`} defaultValue={e.price} />
+                              <Input min={1} disabled={true} type="number" name={`Rfee-${e.id}`} id={`Rfee-${e.id}`} defaultValue={e.price} />
                             </Flex50R>
                         }
                       </div>
                       {
-                        !isStarted &&
+                        canStart &&
                         <FlexIconR>
                           <ButtonIcon onClick={(e) => { }}>
                             <Image src={'/icons/bin-primary.svg'} width={20} height={20} />
@@ -331,7 +331,7 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
               <br />
               <br />
               {
-                !isStarted &&
+                canStart &&
                 <div style={{ display: 'grid', gap: 12 }}>
                   <ButtonPrimary>+ Add new milestone</ButtonPrimary>
                 </div>
@@ -347,23 +347,21 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
                 <Paragraph>Total</Paragraph>
               </FlexTotal>
               <FlexTotal>
-                <HeaderThree id="total">${parseFloat(milestoneTotal)}</HeaderThree>
+                <HeaderThree id="total">${parseFloat(milestoneTotal == 0 ? firstMTotal : milestoneTotal)}</HeaderThree>
               </FlexTotal>
             </FlexRow>
             <br />
-            {
-              !isStarted &&
-              <div style={{ display: 'grid', gap: 12 }}>
-                <Paragraphs id="msgRed"></Paragraphs>
-                {
-                  canStart &&
-                  <>
-                    <ButtonPrimary disabled={isStarted} id="customBtn" onClick={arraysMatch}>Start Project</ButtonPrimary>
-                    <ButtonTertiary>Cancel</ButtonTertiary>
-                  </>
-                }
-              </div>
-            }
+
+            <div style={{ display: 'grid', gap: 12 }}>
+              <Paragraphs id="msgRed"></Paragraphs>
+              {
+                canStart &&
+                <>
+                  <ButtonPrimary disabled={isStarted} id="customBtn" onClick={arraysMatch}>Start Project</ButtonPrimary>
+                  <ButtonTertiary onClick={() => settoglleModal(false)}>Cancel</ButtonTertiary>
+                </>
+              }
+            </div>
 
           </>
         )
@@ -380,9 +378,18 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
     // open modalllllllll
     const viewProposal = async (proj, direction) => {
 
-
       const p = await getsingleProject(token, proj)
       await setTotal(p?.project_details?.price)
+
+      const ThisMilestones = await p?.milestones
+
+      var prices = await new Array(
+        ThisMilestones?.map(e => { return e?.price })
+      )
+
+
+      setfirstMTotal(prices[0]?.reduce((a, b) => parseFloat(a) + parseFloat(b), 0))
+
       setSelectedProj(p)
 
       console.info('can start:', canStart)
@@ -423,6 +430,11 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
     } else {
 
 
+
+
+      // main return
+
+
       return (
         <>
 
@@ -437,13 +449,13 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
                   <Messages>
                     {getconvo?.chats.map((e, key) => {
 
-                      // let firstMsg
-                      // let currentServiceID
+                      let firstMsg
+                      let currentServiceID
 
-                      // let firstMsgProj
-                      // let currentProjID
+                      let firstMsgProj
+                      let currentProjID
 
-                      // let firstMsgStart
+                      let firstMsgStart
 
                       // interested service
                       if (e?.message?.match(regexElance)?.length > 0) {
@@ -454,9 +466,10 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
 
                       // project start send proposal
                       if (e?.message?.match(regexProj)?.length > 0) {
-
                         if (e?.message?.match(regexCounter)?.length > 0) {
                           counterBy.push(e?.message?.match(regexCounter)[1])
+                          currentProjID = e?.message?.match(regexProj)[1]
+                          firstMsgProj = e?.message?.replace(/\[elance-project].*/gi, '')
                           console.info('counter')
                         } else {
                           currentProjID = e?.message?.match(regexProj)[1]
@@ -529,12 +542,12 @@ const ConversationBox = ({ token, getconvo, id, route, isLoading }) => {
                               {
 
                                 e?.message?.match(regexElance)?.length > 0 ?
-                                  <MessageRight key={key + '-Lscard'}>
+                                  <MessageRightSrv key={key + '-Lscard'}>
                                     {firstMsg}<br /><br />
                                     <div>
                                       <ServiceCard id={currentServiceID} />
                                     </div>
-                                  </MessageRight>
+                                  </MessageRightSrv>
                                   :
 
                                   e?.message?.match(regexProj)?.length > 0 ?

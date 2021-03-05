@@ -6,16 +6,22 @@ import { ButtonPill } from '@/components/global/Button';
 
 import { categories } from '../data';
 
-import {CategoriesListContainer, CategoriesList} from './CategoriesListStyles';
+import {
+  CategoriesListContainer,
+  CategoriesList,
+} from './CategoriesListStyles';
 
 const Categories = (props) => {
   return (
     <CategoriesListContainer>
       <PreTitle>Top Categories</PreTitle>
       <CategoriesList>
-        {categories.map((category) => (
-          <ButtonPill onClick={() => Router.push(`/search/${category}`)}>
-            {category}
+        {categories.map((category, i) => (
+          <ButtonPill
+            key={`i-${category}`}
+            onClick={() => Router.push(`/search/${category}`)}
+          >
+            {category}  
           </ButtonPill>
         ))}
       </CategoriesList>

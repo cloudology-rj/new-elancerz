@@ -16,14 +16,14 @@ const socialMediaButtons = ({redirect}) => {
   return (
     <>
       <ButtonFacebook fullWidth>
-        <Flex direction="row">
+        <Flex gap='8px' direction="row">
           <Facebook />
           Continue with Facebook
         </Flex>
       </ButtonFacebook>
 
       <ButtonTertiary isCenter fullWidth onClick={() => signInWithGoogle(redirect)}>
-        <Flex gap="7px" direction="row">
+        <Flex gap="8px" direction="row">
           <Google />
           Continue with google
         </Flex>

@@ -36,8 +36,8 @@ export const HeaderContainer = styled.header`
   background-position: top;
 
   @media ${(props) => props.theme.mediaQueries.tablet} {
-    background-size: cover;
-    background-position: center center;
+    background-size: 74%;
+    background-position: right bottom;
   }
 `;
 

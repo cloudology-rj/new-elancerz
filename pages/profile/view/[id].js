@@ -9,10 +9,10 @@ import Layout from '../../../components/Base/Layout/Layout';
 import Profile from '../../../components/profile/viewProfile/';
 
 import WithLoading from '../../../HOC/WithLoadingAndError';
-import WithAuth from '../../../HOC/withAuth';
+import { ProtectedComponent } from '../../../HOC/withAuth';
 
 const ProfileWithLoading = WithLoading(Profile);
-const ProfileWithAuth = WithAuth(ProfileWithLoading);
+const ProfileWithAuth = ProtectedComponent(ProfileWithLoading);
 
 const FreelanceProfile = () => {
   const router = useRouter();
@@ -32,7 +32,6 @@ const FreelanceProfile = () => {
     { enabled: isIdAvailable }
   );
 
-    // console.log(id, user.id, isLogin);
 
   return (
     <Layout>

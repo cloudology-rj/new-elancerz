@@ -13,6 +13,8 @@ import {
 import YellowStar from '../../../public/icons/yellow-star.svg';
 import WhiteStar from '../../../public/icons/white-star.svg';
 
+import { Flex } from '../../../styles/reusableStyles';
+
 const FreelancerCard = ({
   fullWidth,
   first_name,
@@ -35,16 +37,16 @@ const FreelancerCard = ({
         {first_name} {last_name}
       </Name>
       <PreTitle>{address ? address : 'No Address'}</PreTitle>
-      <FlexContainer>
-        <div>
-          <WhiteStar />
-          <WhiteStar />
-          <WhiteStar />
-          <WhiteStar />
-          <WhiteStar />
-        </div>
+      <Flex gap="8px">
+        <Flex gap="5px">
+          <WhiteStar width={24} height={24} />
+          <WhiteStar width={24} height={24} />
+          <WhiteStar width={24} height={24} />
+          <WhiteStar width={24} height={24} />
+          <WhiteStar width={24} height={24} />
+        </Flex>
         <PreTitle>0</PreTitle>
-      </FlexContainer>
+      </Flex>
     </CardContainer>
   );
 };

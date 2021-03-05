@@ -50,8 +50,8 @@ export const ImageOverlay = styled.div`
     rgba(14, 19, 44, 0.08) 0%,
     rgba(14, 19, 44, 0.32) 100%
   );
-  width: 100%;
-  height: 95%;
+  width: 80%;
+  height: 97%;
   border-radius: 50%;
 
   position: absolute;

@@ -45,13 +45,13 @@ const TopOptions = ({ status, setIsActive }) => {
         }}>
           <RadioCircle active={status ? true : false} />
                    Active
-                </Radio>
+          </Radio>
         <Radio onClick={() => {
           setIsActive(false);
         }}>
           <RadioCircle active={!status ? true : false} />
                     Completed
-                </Radio>
+          </Radio>
       </Tab>
     </TopOptionWrapper>
   )

@@ -14,31 +14,31 @@ import styled from 'styled-components';
 const ConversationMobile = ({ token }) => {
 
 
-  const { isLoading, error, data: srv } = useQuery(
+  const { isLoading, isError, error, data: srv } = useQuery(
     'messagesQuery', () => getMessages(token)
   );
 
-  if (error)
+  if (isError)
     return (
       <NotFound>
         <HeaderTwo>Sorry, something went wrong with your request</HeaderTwo>
       </NotFound>
+    )
+  else {
+
+    return (
+      <div style={{ paddingLeft: 32, paddingRight: 32 }}>
+        <HeaderTwo>Messages</HeaderTwo>
+        <br />
+        <Input type="text" placeholder="Search..." search={true} />
+        <ConversationList list={srv?.data} />
+        {/* <Sidebar peoples={srv?.data} /> */}
+      </div>
     );
 
-  // return null
-  // const [peoples, setPeoples] = useState(peopleList);
+  }
 
 
-  return (
-    <div>
-      <HeaderTwo>Messages</HeaderTwo>
-      <br />
-      <Input type="text" placeholder="enter a message" search={true} />
-      <ConversationList list={srv?.data} />
-      {/* <Sidebar peoples={srv?.data} /> */}
-
-    </div>
-  );
 };
 
 ConversationMobile.propTypes = {};

@@ -6,8 +6,9 @@ export const SidebarContainer = styled.div`
   padding: 1rem;
   position: relative;
   max-height: 100vh;
+  min-width: 10vw;
   overflow-y: scroll;
-
+  z-index: 3;
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;

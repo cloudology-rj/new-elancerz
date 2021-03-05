@@ -271,8 +271,6 @@ export const ButtonFacebook = styled(ButtonPrimary)`
 display:flex;
 justify-content:center;
 align-items:center;
+background:#4266ad;
 
-&:hover{
-  background:#4266ad;
-}
 `

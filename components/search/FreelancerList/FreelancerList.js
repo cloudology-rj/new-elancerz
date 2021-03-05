@@ -7,7 +7,7 @@ import { ListContainer } from './FreelancerListStyles';
 
 import { useAuth } from '../../../context/AuthProvider';
 
-const FreelancerList = ({ list, openAuthModal }) => {
+const FreelancerList = ({ list, openAuthModal,setUser }) => {
   const { isLogin } = useAuth();
 
   const redirect = (id) => {
@@ -15,7 +15,9 @@ const FreelancerList = ({ list, openAuthModal }) => {
 
     if (!isLogin) {
       openAuthModal(true);
+      setUser(id)
     } else {
+      
       Router.push(`/profile/view/${id}`);
     }
   };

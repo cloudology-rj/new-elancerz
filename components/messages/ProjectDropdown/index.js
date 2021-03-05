@@ -76,25 +76,7 @@ const ProjectDropdown = ({ token, getconvo, isLoading }) => {
       if (isFetching) {
         return null
       } else {
-
-
-
-        // const toggleMe = () => {
-        //   if (user?.id == roomCreator) {
-        //     console.info('creator');
-        //     const data = {
-        //       service: 61
-        //     }
-        //     console.info('here')
-        //     createProject({ token, data })
-        //   } else {
-
-        //     settoglleModal(true)
-        //   }
-        // }
-
-
-
+        console.log(prj)
 
         const ModalContent = () => {
 
@@ -240,7 +222,7 @@ const ProjectDropdown = ({ token, getconvo, isLoading }) => {
               <br />
               <div style={{ display: 'grid', gap: 12 }}>
                 <ButtonPrimary onClick={sendProposal}>Submit Proposal</ButtonPrimary>
-                <ButtonTertiary>Cancel</ButtonTertiary>
+                <ButtonTertiary onClick={settoglleModal(false)}>Cancel</ButtonTertiary>
               </div>
 
             </div>

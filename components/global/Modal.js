@@ -30,6 +30,7 @@ const ModalOverlay = styled.div`
   pointer-events: none;
   display: grid;
   place-items: center;
+  overflow: hidden;
 
   ${(props) =>
     props.active &&
@@ -56,9 +57,14 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   transform: translateY(500%);
-  animation: ${showUp} 500ms forwards;
-  @media ${(props) => props.theme.mediaQueries.tablet} {
-    max-width: 500px;
+
+  ${(props) =>
+    props.active &&
+    css`
+      animation: ${showUp} 500ms forwards;
+    `}
+  @media ${(props) => props.theme.mediaQueries.laptop} {
+    max-width: 540px;
     padding: 2rem;
   }
 `;

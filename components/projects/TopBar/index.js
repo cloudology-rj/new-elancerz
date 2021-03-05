@@ -22,10 +22,10 @@ const TopBar = ({ currentView, setCurrentView }) => {
             ? ' Active Projects (2) '
             : ' Completed Projects (1) '
         ) : (
-            employerIsActive
-              ? ' Active Projects (2) '
-              : ' Completed Projects (1) '
-          )}
+          employerIsActive
+            ? ' Active Projects (2) '
+            : ' Completed Projects (1) '
+        )}
       </TopBarTitle>
 
 

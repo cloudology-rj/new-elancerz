@@ -20,7 +20,7 @@ import { ButtonPrimary } from '@/components/global/Button';
 import Input from '@/components/global/Input';
 import Checkbox from '@/components/global/Checkbox';
 import SocialMediaButtons from '../SocialMedia/';
-import {Loader} from '../../global/Loader';
+import { Loader } from '../../global/Loader';
 
 import {
   FlexContainer,
@@ -36,7 +36,6 @@ import { Flex } from '../../../styles/reusableStyles';
 const SignIn = ({ isModal, onSwitch, onPasswordReset, redirect }) => {
   const { setIsLogin, setToken, isLogin } = useAuth();
   const [isMobile] = useContext(IsMobileContext);
-
 
   const { reset } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -68,17 +67,18 @@ const SignIn = ({ isModal, onSwitch, onPasswordReset, redirect }) => {
           // AFTER SIGNING IN IT CAUSE BROWSER TO CRASH
           apiCall('/user/login', 'POST', '', data)
             .then((res) => {
-              //   setIsLogin(true);
-
               fetchMe(res.access_token).then((data) => {
                 console.log(data);
 
                 if (data.email_verified_at) {
+                  setIsLoading(false);
+                  setIsFinish(true);
                   helpers.setStatus({ success: 'signed in' });
                   setToken(res.access_token);
                   reset();
                   redirect && redirect();
                 } else {
+                  setIsLoading(false);
                   helpers.setStatus({
                     verify: 'Please verify your email before proceeding',
                   });
@@ -86,6 +86,7 @@ const SignIn = ({ isModal, onSwitch, onPasswordReset, redirect }) => {
               });
             })
             .catch((err) => {
+              setIsLoading(false);
               helpers.setStatus({ error: 'User does not exist' });
             });
         }}

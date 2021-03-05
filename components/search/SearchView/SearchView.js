@@ -33,19 +33,17 @@ const SearchPage = ({ setSelected, setOptions, options, query, data }) => {
 
   useEffect(() => {
     if (user && freelancer) {
-      const sortedFreelancers = freelancer;
+      const sortedFreelancers = [...freelancer];
 
-      sortedFreelancers.filter((freelancer) => freelancer.id !== user.id);
+      const newFreelancers = sortedFreelancers.filter(
+        (freelancer) => freelancer.id !== user.id
+      );
 
-      setFreelancers(sortedFreelancers);
+      setFreelancers(newFreelancers);
     }
   }, [data, user]);
 
-  if (
-    !data ||
-    data.pages[0].data.length < 1 ||
-    data.pages[0].data == undefined
-  ) {
+  if (!freelancer || freelancer.length === 0) {
     return (
       <NotFound>
         <HeaderTwo>No Freelancers found, please try again</HeaderTwo>
@@ -84,7 +82,7 @@ const SearchPage = ({ setSelected, setOptions, options, query, data }) => {
         </div>
       </Container>
 
-      <FilterSearch show={toggleFilter} onToggleFilter={setToggleFilter} />
+      <FilterSearch show={toggleFilter} onToggleFilter={setToggleFilter} onHide={() =>  setToggleFilter(!toggleFilter)} />
     </>
   );
 };

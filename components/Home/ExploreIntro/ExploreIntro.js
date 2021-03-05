@@ -7,12 +7,20 @@ import { ButtonPrimary } from '@/components/global/Button';
 import FreelancerCategory from '../FreelancerCategory/FreelancerCategory';
 import FreelancerSlider from '../FreelancerSlider/FreelancerSlider';
 
+import AuthModal from '../../../HOC/AuthModal';
+
+
+
 import {
   ExploreContainer,
   FreelanceCategoryContainer,
 } from './ExploreIntroStyles';
 
 import { IsMobileContext } from '../../../context/IsMobile';
+
+const FreelanceCategoryWithModal = AuthModal(FreelancerCategory)
+const FreelanceSliderWithModal = AuthModal(FreelancerSlider)
+
 
 const ExploreIntro = (props) => {
   const [isMobile] = useContext(IsMobileContext);
@@ -26,13 +34,13 @@ const router = useRouter();
       <FreelanceCategoryContainer>
         {isMobile ? (
           <>
-            <FreelancerCategory title="Graphic Designers" />
-            <FreelancerCategory title="Marketing Specialist" />
+            <FreelanceCategoryWithModal title="Graphic Designers" />
+            <FreelanceCategoryWithModal title="Marketing Specialist" />
           </>
         ) : (
           <>
-            <FreelancerSlider title="Graphic Designers" />
-            <FreelancerSlider title="Marketing Specialist" />
+            <FreelanceSliderWithModal title="Graphic Designers" />
+            <FreelanceSliderWithModal title="Marketing Specialist" />
           </>
         )}
 

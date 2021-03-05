@@ -1,21 +1,14 @@
-import { useState } from 'react';
+import MainDashboard from '../../components/dashboard/';
 
-import DashBoardLayout from '../../components/dashboard/DashboardLayout/DashBoardLayout';
-import TopBar from 'components/dashboard/TopBar';
+import { useAuth } from '../../context/AuthProvider';
+import { ProtectedComponent } from '../../HOC/withAuth';
 
-import { VIEW } from '../../components/dashboard/DashboardLayout/Constant';
-
-import CurrentView from '../../components/dashboard/index';
+const DashboardWithAuth = ProtectedComponent(MainDashboard);
 
 const Dashboard = () => {
-  const [currentView, setCurrentView] = useState(VIEW.FREELANCER);
+  const { isLogin } = useAuth();
 
-  return (
-    <DashBoardLayout>
-      <TopBar currentView={currentView} setCurrentView={setCurrentView} />
-      <CurrentView view={currentView} />
-    </DashBoardLayout>
-  );
+  return <DashboardWithAuth isLogin={isLogin} />;
 };
 
 export default Dashboard;

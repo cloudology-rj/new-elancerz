@@ -1,9 +1,9 @@
 import Router from 'next/router';
-import React from 'react';
+
 
 import apiCall from '../../../helpers/fetch';
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import { useAuth } from '../../../context/AuthProvider';
 import { IsMobileContext } from '../../../context/IsMobile';
@@ -31,16 +31,19 @@ const Signup = ({ isModal, onSwitch, redirect, toggleSignup }) => {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(0);
-  const [isMobile] = useContext(IsMobileContext);
+  // const [isMobile] = useContext(IsMobileContext);
 
-  const { isLogin } = useAuth();
+
+
+
   const { showToast, setToastData } = useToast();
 
-  if (isMobile && isLogin) {
-    Router.push('/dashboard');
-  }
 
-  console.log('SIGN UP RENDERING');
+
+
+
+
+
 
   return (
     <>

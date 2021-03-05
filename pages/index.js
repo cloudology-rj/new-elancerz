@@ -3,9 +3,9 @@ import { useAuth } from '../context/AuthProvider';
 
 import MainHomePage from '../components/Home/index';
 
-import WithAuth from '../HOC/withAuth';
+import {withAuthComponent} from '../HOC/withAuth';
 
-const WithAuthHomePage = WithAuth(MainHomePage);
+const WithAuthHomePage = withAuthComponent(MainHomePage);
 
 const Home = () => {
   const { isLogin } = useAuth();

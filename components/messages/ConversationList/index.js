@@ -34,6 +34,7 @@ const ConversationList = ({ list, id, login, isLoading }) => {
     )
   } else {
 
+
     return (
       <ConversationContainer>
         <UnreadTitle>Unread ({list?.length > 0 ? list?.length : 0})</UnreadTitle>
@@ -41,15 +42,15 @@ const ConversationList = ({ list, id, login, isLoading }) => {
           {list ? (
             list.map((person) => (
               <div
-                onClick={() => togglePerson(person?.received_by_user?.id)}
+                onClick={() => togglePerson(person?.id)}
                 key={person?.created_by_user?.id}
               >
                 <Person data={person} id={id} login={login} />
               </div>
             ))
           ) : (
-              <h1>No Freelancers Found</h1>
-            )}
+            <h1>No Freelancers Found</h1>
+          )}
         </div>
       </ConversationContainer >
     );

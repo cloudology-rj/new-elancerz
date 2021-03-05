@@ -32,7 +32,7 @@ import ReviewCard from '../Cards/ReviewCard/ReviewCard';
 
 const Profile = ({ ...props }) => {
 
-  // console.log(props.services);
+  console.log(props);
 
   // route
   const router = useRouter();
@@ -51,6 +51,7 @@ const Profile = ({ ...props }) => {
     setModalActive(!modalActive)
   }
 
+  // console.log(props?.username)
 
   const joinedDate = new Date(props?.created_at)
 
@@ -168,18 +169,18 @@ const Profile = ({ ...props }) => {
             </ButtonSecondary>
           </ExitPublicView>
         ) : (
-            <ProfileBannerButtons>
-              <ButtonPrimary onClick={toggle}>
-                <FlexBetween>
-                  <Image src="/icons/view.svg" width={20} height={20} />
+          <ProfileBannerButtons>
+            <ButtonPrimary onClick={toggle}>
+              <FlexBetween>
+                <Image src="/icons/view.svg" width={20} height={20} />
                 &nbsp;&nbsp;PUBLIC VIEW
               </FlexBetween>
-              </ButtonPrimary>
-              <ButtonSecondary onClick={editClick}>EDIT PROFILE</ButtonSecondary>
-            </ProfileBannerButtons>
-          )}
+            </ButtonPrimary>
+            <ButtonSecondary onClick={editClick}>EDIT PROFILE</ButtonSecondary>
+          </ProfileBannerButtons>
+        )}
 
-        <FlexCenter>
+        <FlexCenter >
           <ProfileCard
             img={props?.avatar == null || props?.avatar == "" ? 'https://via.placeholder.com/500x500.png?text=Profile+Image' : props?.avatar}
             fullname={props?.first_name == null || props?.last_name == null || props?.first_name == "" || props?.last_name == "" ? 'First & Last Name' : props?.first_name + ' ' + props?.last_name}
@@ -236,7 +237,7 @@ const Profile = ({ ...props }) => {
         {/* {services.map((data, index) => ( */}
         {props?.services?.map((data, index) => (
           <ProfileServicesCard
-            key={index}
+            key={data.name + '_' + index}
             // serviceImage={data.img}
             serviceImage={'https://via.placeholder.com/500x500.png?text=Service+Image'}
             serviceName={data.name}
@@ -264,13 +265,13 @@ const Profile = ({ ...props }) => {
           </FlexBaseline>
           </ButtonPrimary>
         ) : (
-            <ButtonTransparent>
-              <FlexBaseline>
-                <Image src="/icons/send.svg" width={20} height={20} />
+          <ButtonTransparent>
+            <FlexBaseline>
+              <Image src="/icons/send.svg" width={20} height={20} />
                 &nbsp;&nbsp;SEND A MESSAGE
           </FlexBaseline>
-            </ButtonTransparent>
-          )}
+          </ButtonTransparent>
+        )}
 
 
 

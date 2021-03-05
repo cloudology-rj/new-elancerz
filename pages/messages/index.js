@@ -16,23 +16,18 @@ const index = () => {
 
   // return null
   return (
-    <MainContainer>
+    <>
       <Navbar fixed={isMobile ? 1 : 0} />
+      <MainContainer>
+        {isMobile ? <ConversationMobile token={token} /> : <ConversationMain token={token} />}
 
-      {isMobile ? (
-        <MessagesContainer>
-          <ConversationMobile />
-        </MessagesContainer>
-      ) : (
-          <ConversationMain token={token} />
-        )}
-
-      <style jsx global>{`
-      body {
-        overflow: hidden;
-      }
-    `}</style>
-    </MainContainer>
+        <style jsx global>{`
+          body {
+            overflow: hidden;
+          }
+        `}</style>
+      </MainContainer>
+    </>
   )
 };
 
@@ -46,13 +41,13 @@ padding: 8px;
 `;
 
 export const MainContainer = styled.main`
-margin-top: 90px;
+// margin-top: 90px;
 
 body {
   overflow: hidden;
 }
 
-@media ${(props) => props.theme.mediaQueries.laptop} {
-  margin-top: 0;
-}
+// @media ${(props) => props.theme.mediaQueries.laptop} {
+//   margin-top: 0;
+// }
 `;

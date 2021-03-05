@@ -1,25 +1,21 @@
-import Router from 'next/router';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-import Freelancer from './DashboardLayout/Freelancer';
-import Employeer from './DashboardLayout/Employeer';
+import DashBoardLayout from './DashboardLayout/DashBoardLayout';
+import TopBar from './TopBar/';
 
-import { useAuth } from '../../context/AuthProvider';
+import { VIEW } from '../../components/dashboard/DashboardLayout/Constant';
 
-import { VIEW } from './DashboardLayout/Constant';
+import DashboardView from './DashboardView';
 
-const CurrentView = ({ view }) => {
-  const { isLogin } = useAuth();
+const Dashboard = () => {
+  const [currentView, setCurrentView] = useState(VIEW.FREELANCER);
 
-  if (!isLogin) {
-    typeof window !== 'undefined' && Router.push('/');
-  }
-
-  return view === VIEW.FREELANCER ? <Freelancer /> : <Employeer />;
+  return (
+    <DashBoardLayout>
+      <TopBar currentView={currentView} setCurrentView={setCurrentView} />
+      <DashboardView view={currentView} />
+    </DashBoardLayout>
+  );
 };
 
-CurrentView.propTypes = {
-  view: PropTypes.string,
-};
-
-export default CurrentView;
+export default Dashboard;

@@ -2,9 +2,14 @@ import styled, { css } from 'styled-components';
 
 
 
+import {
+
+  ButtonOpacity,
+} from '@/components/global/Button';
+
 
 export const FilterOverlay = styled.div`
- position: absolute;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -29,8 +34,7 @@ export const FilterOverlay = styled.div`
       overflow: hidden;
       z-index: 100;
     `}
-`
-
+`;
 
 
 
@@ -54,16 +58,15 @@ export const FilterContainer = styled.div`
     !props.show
       ? css`
           opacity: 0;
-          visibility: hidden
+          visibility: hidden;
         `
       : css`
           opacity: 1;
-          visibility:visible;
+          visibility: visible;
 
           @media ${(props) => props.theme.mediaQueries.mobile} {
             width: 100%;
           }
-  
 
           @media ${(props) => props.theme.mediaQueries.laptop} {
             width: 40%;
@@ -94,3 +97,10 @@ export const FlexCenter = styled.div`
   align-items: center;
   column-gap: 16px;
 `;
+
+
+export const FilterButton = styled(ButtonOpacity)`
+@media ${props => props.theme.mediaQueries.tablet}{
+  display:none;
+}
+`

@@ -6,7 +6,7 @@ export const LogoText = styled.h2`
   font-size: 40px;
   color: ${(props) =>
     props.color === 'white'
-      ? props.theme.colors.white
+      ? props.theme.colors.white  
       : props.theme.colors.dark};
 `;
 

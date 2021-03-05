@@ -56,7 +56,6 @@ export const HeaderContainer = styled.div`
   top: -8px;
   // z-index: 2;
   background: ${(props) => props.theme.colors.cloud};
-
   ${mixins.flexBetween};
   padding: 24px 15px;
 

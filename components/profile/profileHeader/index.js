@@ -26,7 +26,7 @@ const ProfileHeader = ({ role, toggle, isPublic, ...props }) => {
               : `${first_name} ${last_name}`
           }
           title={title ? title : null}
-          username={username ? title : null}
+          username={username}
           star={0}
           rating={0}
           joined={joinedDate.toDateString()}

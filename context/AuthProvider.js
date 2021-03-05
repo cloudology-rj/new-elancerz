@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import Router from 'next/router';
+import jwt_decode from 'jwt-decode';
 
 import apiCall from '../helpers/fetch';
 
 import firebase from 'firebase/app';
-import { firebaseConfig, auth,googleProvider } from '../firebase/firebase';
-
+import { firebaseConfig, auth, googleProvider } from '../firebase/firebase';
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -33,15 +33,19 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    const now = Date.now().valueOf() / 1000;
+
     if (token) {
-      setIsLogin(true);
-      apiCall('/user/me', 'POST', token, null, null)
-        .then((res) => {
-          setUser(res);
-        })
-        .catch((err) => console.log(err));
-    } else{
-      logout()
+      const decoded = jwt_decode(token);
+
+      // if user decided to log in again and token has  already expired then logout
+      if (decoded.exp < now) {
+        //logout the user
+        logout();
+      } else {
+        // Proceed user to login
+        login();
+      }
     }
   }, [token]);
 
@@ -52,13 +56,19 @@ export const AuthProvider = ({ children }) => {
     }
     window.localStorage.clear();
     setIsLogin(false);
-    setToken(null)
-    Router.push('/');
+    setToken(null);
   };
 
-
-
-
+  const login = () => {
+    setIsLogin(true);
+    apiCall('/user/me', 'POST', token, null, null)
+      .then((res) => {
+        setUser(res);
+      })
+      .catch((err) => {
+        throw new Error('Sorry Something went wrong please try again');
+      });
+  };
 
   const signInWithGoogle = (redirect) =>
     auth.signInWithPopup(googleProvider).then((data) => {
@@ -77,7 +87,7 @@ export const AuthProvider = ({ children }) => {
         })
           .then((res) => {
             console.log('Account created through firebase ');
-            redirect()
+            redirect();
           })
           .catch((err) => console.log('ERROR IN SIGNING UP ', err));
       } else {
@@ -85,7 +95,9 @@ export const AuthProvider = ({ children }) => {
           .then((res) => {
             setToken(res.access_token);
           })
-          .catch((err) => console.log('ERROR IN SIGNING IN', err));
+          .catch((err) => {
+            throw new Error('ERROR IN SIGNING IN');
+          });
       }
     });
 

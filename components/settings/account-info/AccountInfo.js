@@ -15,8 +15,13 @@ import Input from '@/components/global/Input'
 import TextArea from '@/components/global/TextArea'
 import Dropdown from '@/components/global/Dropdown'
 
-
-
+// username: "JohnnyWeek"
+// first_name: "Johnny"
+// last_name: "Weeks"
+// email: "test@email.com"
+// timezone: null
+// address: null
+// phone: null
 
 const AccountInfo = ({ isMobile }) => {
 
@@ -61,7 +66,7 @@ const AccountInfo = ({ isMobile }) => {
             <div id="info" style={{ display: "block" }}>
                 <EditButton onClick={editToggle} className="edit-btn" isMobile={isMobile}>
                     <Baseline>
-                        <Image src={'/icons/bin-white.svg'} width={16.5} height={16.5} />
+                        <Image src={'/icons/edit-white.svg'} width={16.5} height={16.5} />
                         &nbsp;
                         EDIT
                     </Baseline>

@@ -71,11 +71,11 @@ const Services = () => {
     }
 
     const newService = (e) => {
-      setIsRouting(true)
       router.push("/services/new/")
     }
 
     const editService = (id) => {
+      setIsRouting(true)
       router.push(`/services/edit/${id}`)
     }
 
@@ -93,7 +93,7 @@ const Services = () => {
 
       const service = srv?.find(x => x.id === selectedService);
       // const service = services.find(x => x.id === selectedService);
-      
+
       try {
 
 

@@ -54,8 +54,9 @@ const ConversationMain = ({ token, id, route }) => {
 
     else {
 
+      console.log(route)
 
-      const specificConvo = srv?.data?.find(x => x.received_by_user.id == id)
+      const specificConvo = srv?.data?.find(x => x.id == id)
 
       return (
 

@@ -52,7 +52,7 @@ const SettingsComponent = ({ section }) => {
                             <li className={clicked == 0 ? !isMobile ? "section-item active" : "section-item" : "section-item"} onClick={() => setClicked(0)}><span><Link href='/settings/account-information'>Account Information</Link></span></li>
                             <li className={clicked == 1 ? !isMobile ? "section-item active" : "section-item" : "section-item"} onClick={() => setClicked(1)}><span><Link href='/settings/payment-details'>Payment Details</Link></span></li>
                             <li className={clicked == 2 ? !isMobile ? "section-item active" : "section-item" : "section-item"} onClick={() => setClicked(2)}><span><Link href='/settings/password-and-security'>Password and Security</Link></span></li>
-                            <li><FlexLine/></li>
+                            <li><FlexLine /></li>
                             <li className={clicked == 3 ? !isMobile ? "section-item active" : "section-item" : "section-item"} onClick={() => setClicked(3)}><span><Link href='/settings/terms-of-service'>Terms of service</Link></span></li>
                             <li className={clicked == 4 ? !isMobile ? "section-item active" : "section-item" : "section-item"} onClick={() => setClicked(4)}><span><Link href='/settings/privacy-policy'>Privacy Policy</Link></span></li>
                         </ul>
@@ -61,11 +61,11 @@ const SettingsComponent = ({ section }) => {
                 <Details>
                     <Child>
                         {section == 'account-information' && <AccountInfo isMobile={isMobile} />}
-                        {section == 'terms-of-service' && <Terms />}
-                        {section == 'privacy-policy' && <Privacy />}
-                        {section == 'payment-details' && <Payment />}
-                        {section == 'password-and-security' && <Security />} 
-                    </Child>                    
+                        {section == 'terms-of-service' && <Terms isMobile={isMobile} />}
+                        {section == 'privacy-policy' && <Privacy isMobile={isMobile} />}
+                        {section == 'payment-details' && <Payment isMobile={isMobile} />}
+                        {section == 'password-and-security' && <Security isMobile={isMobile} />}
+                    </Child>
                 </Details>
             </SettingsGrid>
 

@@ -97,8 +97,6 @@ const FormikStep = (
 const ForgotPassword = ({ onSwitch, isModal }) => {
   const [step, setStep] = useState(0);
 
-  console.log('FORGOT PASSWORD RENDERING')
-
   const router = useRouter();
   return (
     <AccoutContainer>

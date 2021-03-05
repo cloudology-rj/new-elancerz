@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -14,18 +14,28 @@ import CategoryListToggle from '../../sections/CategoryList/CategoryListToggle';
 
 import data from './data';
 
+import useOutsideClick from '../../../hooks/useOutsideClick'
+
 import {
   FilterContainer,
   FilterHeader,
   FlexContainer,
   FlexCenter,
   FilterOverlay,
+  FilterButton,
 } from './FilterSearchStyles';
 
-const FilterSearch = ({ show, onToggleFilter }) => {
-  const [filters, setFilters] = useState(data);
+import Filter from '../../../public/icons/Filter.svg';
+import ArrowPointLeft from '../../../public/icons/ArrowPointLeft.svg';
 
-  console.log('rendering filterSearch');
+const FilterSearch = ({ show, onToggleFilter,onHide }) => {
+  const [filters, setFilters] = useState(data);
+  const filter = useRef(null)
+
+
+
+useOutsideClick(filter,onHide)
+
 
   //toggle all selected to be false
   const resetSelection = (data) =>
@@ -57,21 +67,16 @@ const FilterSearch = ({ show, onToggleFilter }) => {
 
   const { locations, categories } = filters;
   return (
-    <FilterOverlay show={show}>
-      <FilterContainer show={show}>
+    <FilterOverlay  show={show}>
+      <FilterContainer ref={filter} show={show}>
         <FilterHeader>
           <FlexContainer>
-            <Image
-              src="/icons/Filter.svg"
-              width={20}
-              height={20}
-              alt="Filter Icon"
-            />
+            <Filter alt="Filter Icon" />
             <HeaderThree>Filters</HeaderThree>
           </FlexContainer>
-          <ButtonOpacity onClick={() => onToggleFilter(false)}>
-            <Image src="/icons/ArrowPointLeft.svg" width={24} height={24} />
-          </ButtonOpacity>
+          <FilterButton onClick={() => onToggleFilter(false)}>
+            <ArrowPointLeft width={24} height={24} />
+          </FilterButton>
         </FilterHeader>
 
         <CategoryListToggle

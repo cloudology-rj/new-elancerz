@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-
 import SearchIcon from '../../public/icons/search.svg';
 
 const InputStyle = styled.input`
@@ -14,16 +13,20 @@ const InputStyle = styled.input`
   border: 1px solid ${(props) => props.theme.colors.secondaryBrand};
   background-color: ${(props) => props.theme.colors.cloud};
   display: inline-block;
+  font-family: 'Open sans', sans-serif;
+
 
   ::placeholder,
   ::-webkit-input-placeholder {
     font-size: ${(props) => props.theme.fontSizes.s4};
     color: ${(props) => props.theme.colors.subtleText};
+    font-family: 'Open sans', sans-serif;
   }
+
   :-ms-input-placeholder {
     font-size: ${(props) => props.theme.fontSizes.s4};
     color: ${(props) => props.theme.colors.subtleText};
-    padding: 12px 16px;
+    font-family: 'Open sans', sans-serif;
   }
 
   ${(props) =>
@@ -54,7 +57,7 @@ const InputStyle = styled.input`
 
 const Inputcontainer = styled.div`
   position: relative;
-  width:100%;
+  width: 100%;
 `;
 
 const IconValidation = styled.img`
@@ -69,15 +72,21 @@ const Search = styled(SearchIcon)`
   right: 18px;
   top: 13px;
   bottom: 18px;
-  width:24px;
-  height:24px;
-
+  width: 24px;
+  height: 24px;
 `;
 
 const Input = ({ error, success, search, name, id, reference, ...props }) => {
   return (
     <Inputcontainer>
-      <InputStyle success={success} error={error} {...props} name={name} id={id} ref={reference} />
+      <InputStyle
+        success={success}
+        error={error}
+        {...props}
+        name={name}
+        id={id}
+        ref={reference}
+      />
 
       {error && (
         <IconValidation src="/icons/error.svg" alt="error message icon" />
@@ -89,9 +98,7 @@ const Input = ({ error, success, search, name, id, reference, ...props }) => {
           alt="error message icon"
         />
       )}
-      {search && (
-        <Search />
-      )}
+      {search && <Search />}
     </Inputcontainer>
   );
 };

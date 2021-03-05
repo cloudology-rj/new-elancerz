@@ -35,6 +35,26 @@ color: white;
 `;
 
 
+export const MessageRightSrv = styled.div`
+background: ${(props) => props.theme.colors.primaryBrand};
+padding: 1rem;
+border-radius: 24px 8px 24px 24px;
+max-width: 100%;
+@media ${(props) => props.theme.mediaQueries.desktop} {
+  max-width: 490px;
+}
+
+overflow-wrap: break-word;
+/* text */
+font-family: Open Sans;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 140%;
+color: white;
+`;
+
+
 
 
 // left message
